@@ -1,19 +1,13 @@
 ## Big Transfer (BiT): General Visual Representation Learning
-*by Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung, Sylvain Gelly, Neil Houlsby*
-
-
-**Update 18/06/2021:** We release new high performing BiT-R50x1 models, which were distilled from BiT-M-R152x2, see [this section](#distilled-models). More details in our [paper "Knowledge distillation: A good teacher is patient and consistent"](https://arxiv.org/abs/2106.05237).
-
-**Update 08/02/2021:** We also release ALL BiT-M models fine-tuned on ALL 19 VTAB-1k datasets, see below.
 
 ## Introduction
 
-In this repository we release multiple models from the [Big Transfer (BiT): General Visual Representation Learning](https://arxiv.org/abs/1912.11370) paper that were pre-trained on the [ILSVRC-2012](http://www.image-net.org/challenges/LSVRC/2012/) and [ImageNet-21k](http://www.image-net.org/) datasets.
-We provide the code to fine-tuning the released models in the major deep learning frameworks [TensorFlow 2](https://www.tensorflow.org/), [PyTorch](https://pytorch.org/) and [Jax](https://jax.readthedocs.io/en/latest/index.html)/[Flax](http://flax.readthedocs.io).
+In this repository I release multiple models from the [Big Transfer (BiT): General Visual Representation Learning](https://arxiv.org/abs/1912.11370) paper that were pre-trained on the [ILSVRC-2012](http://www.image-net.org/challenges/LSVRC/2012/) and [ImageNet-21k](http://www.image-net.org/) datasets.
+I have provided the code to fine-tuning the released models in the major deep learning frameworks [TensorFlow 2](https://www.tensorflow.org/), [PyTorch](https://pytorch.org/) and [Jax](https://jax.readthedocs.io/en/latest/index.html)/[Flax](http://flax.readthedocs.io).
 
-We hope that the computer vision community will benefit by employing more powerful ImageNet-21k pretrained models as opposed to conventional models pre-trained on the ILSVRC-2012 dataset.
+I hope that the computer vision community will benefit by employing more powerful ImageNet-21k pretrained models as opposed to conventional models pre-trained on the ILSVRC-2012 dataset.
 
-We also provide colabs for a more exploratory interactive use:
+I have also provide colabs for a more exploratory interactive use:
 a [TensorFlow 2 colab](https://colab.research.google.com/github/google-research/big_transfer/blob/master/colabs/big_transfer_tf2.ipynb),
 a [PyTorch colab](https://colab.research.google.com/github/google-research/big_transfer/blob/master/colabs/big_transfer_pytorch.ipynb),
 and a [Jax colab](https://colab.research.google.com/github/google-research/big_transfer/blob/master/colabs/big_transfer_jax.ipynb).
