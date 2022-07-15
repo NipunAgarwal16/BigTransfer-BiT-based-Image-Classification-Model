@@ -39,9 +39,9 @@ python3 -m bit_{pytorch|jax|tf2}.train --name cifar10_`date +%F_%H%M%S` --model 
 ```
 Currently. all frameworks will automatically download CIFAR-10 and CIFAR-100 datasets. Other public or custom datasets can be easily integrated: in TF2 and JAX we rely on the extensible [tensorflow datasets library](https://github.com/tensorflow/datasets/). In PyTorch, we use [torchvision’s data input pipeline](https://pytorch.org/docs/stable/torchvision/index.html).
 
-Note that our code uses all available GPUs for fine-tuning.
+Note that this code uses all available GPUs for fine-tuning.
 
-We also support training in the low-data regime: the `--examples_per_class <K>` option will randomly draw K samples per class for training.
+This code also support training in the low-data regime: the `--examples_per_class <K>` option will randomly draw K samples per class for training.
 
 To see a detailed list of all available flags, run `python3 -m bit_{pytorch|jax|tf2}.train --help`.
 
@@ -56,15 +56,15 @@ wget https://storage.googleapis.com/bit_models/BiT-M-R50x1-ILSVRC2012.npz
 
 ### Available architectures
 
-We release all architectures mentioned in the paper, such that you may choose between accuracy or speed: R50x1, R101x1, R50x3, R101x3, R152x4.
+I released all architectures mentioned in the paper, such that you may choose between accuracy or speed: R50x1, R101x1, R50x3, R101x3, R152x4.
 In the above path to the model file, simply replace `R50x1` by your architecture of choice.
 
-We further investigated more architectures after the paper's publication and found R152x2 to have a nice trade-off between speed and accuracy, hence we also include this in the release and provide a few numbers below.
+I further investigated more architectures after the paper's publication and found R152x2 to have a nice trade-off between speed and accuracy, hence I have also included this in the release and provide a few numbers below.
 
 
 ### BiT-M models fine-tuned on the 19 VTAB-1k tasks
 
-We also release the fine-tuned models for each of the 19 tasks included in the VTAB-1k benchmark. We ran each model three times and release each of these runs. This means we release a total of 5x19x3=285 models, and hope these can be useful in further analysis of transfer learning.
+I have also release the fine-tuned models for each of the 19 tasks included in the VTAB-1k benchmark. I ran each model three times and release each of these runs. This means that I release a total of 5x19x3=285 models, and hope these can be useful in further analysis of transfer learning.
 
 The files can be downloaded via the following pattern:
 
@@ -72,7 +72,7 @@ The files can be downloaded via the following pattern:
 wget https://storage.googleapis.com/bit_models/vtab/BiT-M-{R50x1,R101x1,R50x3,R101x3,R152x4}-run{0,1,2}-{caltech101,diabetic_retinopathy,dtd,oxford_flowers102,oxford_iiit_pet,resisc45,sun397,cifar100,eurosat,patch_camelyon,smallnorb-elevation,svhn,dsprites-orientation,smallnorb-azimuth,clevr-distance,clevr-count,dmlab,kitti-distance,dsprites-xpos}.npz
 ```
 
-We did not convert these models to TF2 (hence there is no corresponding `.h5` file), however, we also uploaded [TFHub](http://tfhub.dev) models which can be used in TF1 and TF2. An example sequence of commands for downloading one such model is:
+I did not convert these models to TF2 (hence there is no corresponding `.h5` file), however, I also uploaded [TFHub](http://tfhub.dev) models which can be used in TF1 and TF2. An example sequence of commands for downloading one such model is:
 
 ```
 mkdir BiT-M-R50x1-run0-caltech101.tfhub && cd BiT-M-R50x1-run0-caltech101.tfhub
@@ -86,12 +86,12 @@ wget https://storage.googleapis.com/bit_models/vtab/BiT-M-R50x1-run0-caltech101.
 For reproducibility, our training script uses hyper-parameters (BiT-HyperRule) that were used in the original paper.
 Note, however, that BiT models were trained and finetuned using Cloud TPU hardware, so for a typical GPU setup our default hyper-parameters could require too much memory or result in a very slow progress.
 Moreover, BiT-HyperRule is designed to generalize across many datasets, so it is typically possible to devise more efficient application-specific hyper-parameters.
-Thus, we encourage the user to try more light-weight settings, as they require much less resources and often result in a similar accuracy.
+Thus, wI encourage the user to try more light-weight settings, as they require much less resources and often result in a similar accuracy.
 
-For example, we tested our code using a 8xV100 GPU machine on the CIFAR-10 and CIFAR-100 datasets, while reducing batch size from 512 to 128 and learning rate from 0.003 to 0.001.
+For example, I tested our code using a 8xV100 GPU machine on the CIFAR-10 and CIFAR-100 datasets, while reducing batch size from 512 to 128 and learning rate from 0.003 to 0.001.
 This setup resulted in nearly identical performance (see [Expected results](#expected-results) below) in comparison to BiT-HyperRule, despite being less computationally demanding.
 
-Below, we provide more suggestions on how to optimize our paper's setup.
+Below, I provide more suggestions on how to optimize our paper's setup.
 
 ### Tips for optimizing memory or speed
 
@@ -108,7 +108,7 @@ Here are some tips if you are running out of memory:
 
 ## Expected results
 
-We verified that when using the BiT-HyperRule, the code in this repository reproduces the paper's results.
+I have verified that when using the BiT-HyperRule, the code in this repository reproduces the paper's results.
 
 ### CIFAR results (few-shot and full)
 
@@ -183,7 +183,7 @@ These are re-runs and not the exact paper models. The expected VTAB scores for t
 
 ## Out of context dataset
 
-In Appendix G of our paper, we investigate whether BiT improves out-of-context robustness.
+In Appendix G of the paper, we investigate whether BiT improves out-of-context robustness.
 To do this, we created a dataset comprising foreground objects corresponding to 21 ILSVRC-2012 classes pasted onto 41 miscellaneous backgrounds.
 
 To download the dataset, run
@@ -194,20 +194,3 @@ wget https://storage.googleapis.com/bit-out-of-context-dataset/bit_out_of_contex
 
 Images from each of the 21 classes are kept in a directory with the name of the class.
 
-## Distilled models
-
-We release top-performing compressed BiT models from our [paper "Knowledge distillation: A good teacher is patient and consistent"](https://arxiv.org/abs/2106.05237) on knoweldge distillation.
-In particular, we distill the BiT-M-R152x2 model (which was pre-trained on ImageNet-21k) to BiT-R50x1 models.
-As a result, we obtain compact models with very competitive performance.
-
-| Model      | Download link | Resolution  | ImageNet top-1 acc. (paper) | 
-| :---       | :---:         | :---:       |  :---:                      |
-| BiT-R50x1  | [link](https://storage.googleapis.com/bit_models/distill/R50x1_224.npz)      | 224 |  82.8 |
-| BiT-R50x1  | [link](https://storage.googleapis.com/bit_models/distill/R50x1_160.npz)      | 160 |  80.5 |
-
-For reproducibility, we also release weights of two BiT-M-R152x2 teacher models: pretrained at [resolution 224](https://storage.googleapis.com/bit_models/distill/R152x2_T_224.npz) and [resolution 384](https://storage.googleapis.com/bit_models/distill/R152x2_T_384.npz). See the paper for details on how these teachers were used.
-
-### Distillation code
-
-We have no concrete plans for publishing the distillation code, as the recipe is simple and we imagine most people would integrate it in their existing training code.
-However, [Sayak Paul](https://sayak.dev/) has independently [re-implemented the distillation setup in TensorFlow](https://github.com/sayakpaul/FunMatch-Distillation) and nearly reproduced our results in several settings.
